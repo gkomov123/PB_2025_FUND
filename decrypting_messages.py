@@ -8,5 +8,4 @@ for i in range(n):
     letter = chr(letter_decryption)
     decrypt.append(letter)
 
-for i in decrypt:
-    print(i, end="")
+print("".join(decrypt))
