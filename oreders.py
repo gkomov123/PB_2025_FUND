@@ -1,7 +1,7 @@
 product_input = input()
 quantity_input = int(input())
 
-def price_calculator(product:str, quantity:int) -> float:
+def price_calculator(product:str, quantity:int):
     if product == "coffee":
         return quantity * 1.50
     elif product == "water":

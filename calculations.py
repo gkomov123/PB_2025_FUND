@@ -15,7 +15,7 @@ def multiply(num1:int, num2:int):
 def divide(num1:int, num2:int):
     return int(num1 / num2)
 
-def calculated(operator:str, num1:int, num2:int) -> int:
+def calculated(operator:str, num1:int, num2:int):
     if operator == "add":
        return add(num1, num2)
     elif operator == "subtract":
