@@ -19,20 +19,20 @@ def explore(some_row, some_col, moves):  # DFS search to find the longest route 
     if maze[some_row][some_col] == "#":
         return 0
 
-    # Checks if Kate reached the edge of the maze and the cell is not "#' then she can escape
-    if ((some_row == 0 or some_row == len(maze) - 1 or some_col == 0 or some_col == len(maze[some_row]) - 1)
-            and maze[some_row][some_col] != "#"):
-        return moves + 1
-
     maze[some_row][some_col] = "#"
+    moves += 1
 
     directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
-
     best_moves = 0
 
-    for d_row, d_col in directions:
-        result = explore(some_row + d_row, some_col + d_col, moves + 1)
-        best_moves = max(best_moves, result)
+    for dr, dc in directions:
+        nr, nc = some_row + dr, some_col + dc
+        # If neighbor is on edge and empty, Kate can escape in next step
+        if 0 <= nr < len(maze) and 0 <= nc < len(maze[0]):
+            if (nr == 0 or nr == len(maze) - 1 or nc == 0 or nc == len(maze[0]) - 1) and maze[nr][nc] == " ":
+                best_moves = max(best_moves, moves + 1)
+            else:
+                best_moves = max(best_moves, explore(nr, nc, moves))
 
     maze[some_row][some_col] = " "
 
@@ -44,11 +44,12 @@ maze = []
 start_row = 0
 start_col = 0
 
-# maze = [
-#     ["#", "k", " ", "#"],
-#     ["#", " ", " ", "#"],
-#     ["#", "#", "#", "#"]
-# ]
+# maze =
+######
+##k###
+## ###
+##  ##
+#
 
 # Append rows to the maze
 for row in range(rows):
@@ -60,8 +61,11 @@ for row in range(len(maze)):
         if maze[row][col] == "k":
             start_row = row
             start_col = col
+            break
 
 max_moves = explore(start_row, start_col, 0)
+if start_row == 0 or start_row == rows - 1 or start_col == 0 or start_col == len(maze[0]) - 1:
+    max_moves = max(max_moves, 1)
 
 if max_moves > 0:
     print(f"Kate got out in {max_moves} moves")
