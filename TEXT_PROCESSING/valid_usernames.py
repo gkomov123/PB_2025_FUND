@@ -30,5 +30,7 @@ def username_validation(users: list) -> list:
 usernames_input = input().split(", ")
 valid_usernames = username_validation(usernames_input)
 
-for username in valid_usernames:
-    print(username)
+print("\n".join(valid_usernames))
+
+# for username in valid_usernames:
+#     print(username)
