@@ -1,6 +1,6 @@
 import re
 
-regex = r'(#|\|)([A-Za-z\s]+)\1([\d]{2}/[\d]{2}/[\d]{2})\1([\d]+)\1'
+regex = r'(#|\|)([A-Za-z\s]+)\1(\d{2}/\d{2}/\d{2})\1(\d+)\1'
 food_string = input()
 
 foods_info = re.findall(regex, food_string)
